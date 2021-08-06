@@ -6,22 +6,63 @@ import { getHoldings, getCoinMarket } from '../stores/market/marketActions';
 import { useFocusEffect } from '@react-navigation/native';
 
 import { MainLayout } from './';
+import { BalanceInfo, IconTextButton } from '../components';
 
 import { SIZES, COLORS, FONTS, dummyData, icons } from '../constants';
-import { holdings } from '../constants/dummy';
+// import { holdings } from '../constants/dummy';
 
 const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
   useFocusEffect(
     React.useCallback(() => {
-      getHoldings(holdings);
+      getHoldings(dummyData.holdings);
       getCoinMarket();
     }, [])
   );
 
+  let totalWallet = myHoldings.reduce((a, b) => a + (b.total || 0), 0);
+  let valueChange = myHoldings.reduce(
+    (a, b) => a + (b.holding_value_change_7d || 0),
+    0
+  );
+  let percChange = (valueChange / (totalWallet - valueChange)) * 100;
+
+  function reanderWalletInfoSection() {
+    return (
+      <View
+        style={{
+          paddingHorizontal: SIZES.padding,
+          borderBottomLeftRadius: 25,
+          borderBottomRightRadius: 25,
+          backgroundColor: COLORS.gray,
+        }}
+      >
+        {/* Balance Info */}
+        <BalanceInfo
+          title='Your Wallet'
+          displayAmount={1000000}
+          changePct={percChange}
+          containerStyle={{
+            marginTop: 50,
+          }}
+        />
+      </View>
+    );
+  }
+
   return (
     <MainLayout>
-      <View>
-        <Text>Home</Text>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: COLORS.black,
+        }}
+      >
+        {/* Header - Wallet Info */}
+        {reanderWalletInfoSection()}
+
+        {/* Chart */}
+
+        {/* Top Cryptocurrency */}
       </View>
     </MainLayout>
   );

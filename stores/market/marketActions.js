@@ -23,7 +23,7 @@ export const getHoldingsFailure = (error) => ({
 
 export function getHoldings(
   holdings = [],
-  currency = 'idr',
+  currency = 'usd',
   orderBy = 'market_cap_desc',
   sparkline = true,
   priceChangePerc = '7d',
@@ -46,7 +46,7 @@ export function getHoldings(
       .then((response) => {
         console.log('GetHoldings');
         console.log(response);
-        if (response.state == 200) {
+        if (response.status == 200) {
           // Massage data
           let myHoldings = response.data.map((item) => {
             // Retrieve our current holdings -> current quantity
@@ -102,7 +102,7 @@ export const getCoinMarketFailure = ({ error }) => ({
 });
 
 export function getCoinMarket(
-  currency = 'idr',
+  currency = 'usd',
   orderBy = 'market_cap_desc',
   sparkline = true,
   priceChangePerc = '7d',
@@ -122,7 +122,7 @@ export function getCoinMarket(
       .then((response) => {
         console.log('GetCoinMarket');
         console.log(response);
-        if (response.state === 200) {
+        if (response.status === 200) {
           dispatch(getCoinMarketSuccess(response.data));
         } else {
           dispatch(getCoinMarketFailure(response.data));
