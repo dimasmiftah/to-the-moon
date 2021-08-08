@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { SIZES, COLORS, FONTS, icons } from '../constants';
 
+import { currencyFormat } from '../helpers';
+
 const BalanceInfo = ({ title, displayAmount, changePct, containerStyle }) => {
   return (
     <View>
@@ -14,10 +16,7 @@ const BalanceInfo = ({ title, displayAmount, changePct, containerStyle }) => {
         <Text
           style={{ ...FONTS.h2, color: COLORS.white, marginLeft: SIZES.base }}
         >
-          {displayAmount.toLocaleString('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          })}
+          {currencyFormat(displayAmount)}
         </Text>
         <Text style={{ ...FONTS.h3, color: COLORS.lightGray3 }}> USD</Text>
       </View>
