@@ -45,6 +45,29 @@ const Home = ({ getHoldings, getCoinMarket, myHoldings, coins }) => {
             marginTop: 50,
           }}
         />
+
+        {/* Buttons */}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: 30,
+            marginBottom: -15,
+            paddingHorizontal: SIZES.radius,
+          }}
+        >
+          <IconTextButton
+            label='Transfer'
+            icon={icons.send}
+            containerStyle={{ flex: 1, height: 40, marginRight: SIZES.radius }}
+            onPress={() => console.log('Transfer')}
+          />
+          <IconTextButton
+            label='Withdraw'
+            icon={icons.withdraw}
+            containerStyle={{ flex: 1, height: 40 }}
+            onPress={() => console.log('Withdraw')}
+          />
+        </View>
       </View>
     );
   }
